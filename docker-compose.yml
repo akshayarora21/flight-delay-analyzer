@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    container_name: flight-delay-analyzer
+    ports:
+      - "8080:8080"
+    environment:
+      # Switch to Postgres by overriding these
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:flightdb;DB_CLOSE_DELAY=-1
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      APP_BTS_DATA_PATH: src/main/resources/bts_flights.csv
+      APP_BTS_MAX_ROWS: "100000"
+    volumes:
+      # Mount your BTS CSV into the container
+      - ./src/main/resources:/app/src/main/resources:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped

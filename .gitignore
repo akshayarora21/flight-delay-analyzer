@@ -1,0 +1,11 @@
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+.vscode/
+.DS_Store
+src/main/resources/bts_flights.csv
+src/main/resources/bts_*.csv
+*.log
