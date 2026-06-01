@@ -2,8 +2,6 @@
 
 A Java/Spring Boot REST API that ingests historical BTS On-Time Performance data and predicts flight delay risk for any domestic US route, airline, and travel month.
 
-![CI](https://github.com/YOUR_USERNAME/flight-delay-analyzer/actions/workflows/ci.yml/badge.svg)
-
 ---
 
 ## The Problem
