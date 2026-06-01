@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,10 +47,9 @@ class DelayRiskServiceTest {
 
     @BeforeEach
     void stubFallback() {
-        // Default: return empty for specific queries so fallback is used
-        when(repo.findByRouteCarrierAndMonth(anyString(), anyString(), anyString(), anyInt()))
+        lenient().when(repo.findByRouteCarrierAndMonth(anyString(), anyString(), anyString(), anyInt()))
             .thenReturn(Collections.emptyList());
-        when(repo.findByRouteAndCarrier(anyString(), anyString(), anyString()))
+        lenient().when(repo.findByRouteAndCarrier(anyString(), anyString(), anyString()))
             .thenReturn(Collections.emptyList());
     }
 
